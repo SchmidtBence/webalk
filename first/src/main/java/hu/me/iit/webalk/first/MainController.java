@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping(path="article/")
+@RequestMapping("article")
 public class MainController {
     private final List<ArticleDto> articles=new ArrayList<>();
 
@@ -18,34 +18,25 @@ public class MainController {
         return articles;
     }
 
-    @PostMapping(path="")
-            public void newArticle(@RequestBody ArticleDto articleDto) {
-            articles.add(articleDto);
-            }
-
-    private int findArticleById(String id) {
-            int found = -1;
-            for (int i = 0; i < articles.size(); i++) {
-                if (articles.get(i).getTitle().equals(id)) {
-                    found = i;
-                    break;
-                }
-            }
-        return found;
-        }
-
-        @GetMapping(path="")
-        public article getArticle(@PathVariable("id") String id) {
-            for (article ar: articles) {
+     /*@GetMapping(path="")
+        public ArticleDto getArticle(@PathVariable("id") String id) {
+            for (ArticleDto ar: articles) {
                 if(ar.getId().equals(id)) {
                     return ar;
                 }
             }
             return null;
-        }
+        }*/
 
-        @PutMapping(path = "{id}")
-        public void ReplaceArticle (@PathVariable("id") String id,@RequestBody ArticleDto articleDto){
+    @PostMapping("")
+            public void newArticle(@RequestBody @Valid ArticleDto articleDto) {
+            articles.add(articleDto);
+            }
+
+
+
+        @PutMapping( "/{id}")
+        public void ReplaceArticle (@PathVariable("id") String id,@RequestBody @Valid ArticleDto articleDto){
            int found=findArticleById(id);
 
             if (found != -1) {
@@ -55,7 +46,7 @@ public class MainController {
             }
         }
 
-    @DeleteMapping(path="{id}")
+    @DeleteMapping("/{id}")
     public void DeleteArticle(@PathVariable("id") String id) {
         int found=-1;
         for (int i=0; i<articles.size(); i++){
