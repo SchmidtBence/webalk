@@ -1,8 +1,11 @@
 package hu.me.iit.webalk.first;
 
+import org.springframework.stereotype.Component;
+
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
 public class ArticleRepositoryMemoryImpl implements ArticleRepository {
     private final List<ArticleDto> articles=new ArrayList<>();
 
@@ -19,7 +22,7 @@ public class ArticleRepositoryMemoryImpl implements ArticleRepository {
 
     @Override
     public List<ArticleDto> findall() {
-        return null;
+        return articles;
     }
 
     @Override
@@ -43,6 +46,10 @@ public class ArticleRepositoryMemoryImpl implements ArticleRepository {
 
     @Override
     public void deleteById(Long id) {
+    int found = findArticleById(id);
 
+    if (found != -1) {
+    articles.remove(found);
+    }
     }
 }

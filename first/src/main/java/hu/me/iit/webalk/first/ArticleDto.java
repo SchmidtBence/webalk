@@ -8,7 +8,6 @@ import javax.validation.constraints.NotNull;
 public class ArticleDto {
     @NotNull
     private long id;
-
     @NotNull
     @NotBlank
     private String author;
