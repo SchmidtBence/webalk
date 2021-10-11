@@ -1,12 +1,12 @@
 package hu.me.iit.webalk.first;
 
 import java.util.List;
-
-import static org.junit.Assert.*;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class ArticleRepositoryMemoryImplTest {
 
-    @org.junit.Test
+    @Test
     public void findall_Enty() {
         // GIWEN
         ArticleRepositoryMemoryImpl articleRepositoryMemory = new ArticleRepositoryMemoryImpl();
@@ -18,7 +18,7 @@ public class ArticleRepositoryMemoryImplTest {
         assertEquals(0,result.size());
     }
 
-    @org.junit.Test
+    @Test
     public void findAll_NotEmpty() {
         // GIWEN
         ArticleRepositoryMemoryImpl articleRepositoryMemory = new ArticleRepositoryMemoryImpl();
@@ -38,7 +38,7 @@ public class ArticleRepositoryMemoryImplTest {
 
     }
 
-    @org.junit.Test
+    @Test
     public void findArticleById() {
         // GIWEN
         ArticleRepositoryMemoryImpl articleRepositoryMemory = new ArticleRepositoryMemoryImpl();
@@ -57,29 +57,31 @@ public class ArticleRepositoryMemoryImplTest {
 
     }
 
-    @org.junit.Test
+    @Test
     public void findArticleById_NotFound() {
         // GIWEN
         ArticleRepositoryMemoryImpl articleRepositoryMemory = new ArticleRepositoryMemoryImpl();
         Long id=2l;
+        Long notExistsId = 4L;
         ArticleDto articleDto=new ArticleDto();
         articleDto.setAuthor("Author");
         articleDto.setPages(23);
         articleDto.setId(id);
         articleDto.setTitle("title");
+
         articleRepositoryMemory.save(articleDto);
 
         // WHEN
-        int result= articleRepositoryMemory.findArticleById(id);
+        int result = articleRepositoryMemory.findArticleById(notExistsId);
         // THEN
-        assertEquals(0,articleRepositoryMemory.findall().size());
+        assertEquals(-1, result);
 
     }
+    @Test
     void deleteById(){
         // GIWEN
         ArticleRepositoryMemoryImpl articleRepositoryMemory = new ArticleRepositoryMemoryImpl();
         Long id=2l;
-        Long notExists=4l;
         ArticleDto articleDto=new ArticleDto();
         articleDto.setAuthor("Author");
         articleDto.setPages(23);
@@ -92,39 +94,67 @@ public class ArticleRepositoryMemoryImplTest {
         // THEN
         assertEquals(0,articleRepositoryMemory.findall().size());
     }
+    @Test
     void deleteById_notExists(){
         // GIWEN
         ArticleRepositoryMemoryImpl articleRepositoryMemory = new ArticleRepositoryMemoryImpl();
-        Long id=2l;
-        Long notExists=4l;
-        ArticleDto articleDto=new ArticleDto();
+        Long id = 2L;
+        Long notExistsId = 4L;
+        ArticleDto articleDto = new ArticleDto();
         articleDto.setAuthor("Author");
         articleDto.setPages(23);
         articleDto.setId(id);
         articleDto.setTitle("title");
+
         articleRepositoryMemory.save(articleDto);
 
         // WHEN
-        articleRepositoryMemory.deleteById(id);
+        articleRepositoryMemory.deleteById(notExistsId);
+
         // THEN
-        assertEquals(1,articleRepositoryMemory.findall().size());
+        assertEquals(1, articleRepositoryMemory.findall().size());
     }
+    @Test
     void getById_notExists(){
-        // GIWEN
+        // GIVEN
         ArticleRepositoryMemoryImpl articleRepositoryMemory = new ArticleRepositoryMemoryImpl();
-        Long id=2l;
-        ArticleDto articleDto=new ArticleDto();
+        Long id = 2L;
+        Long notExistsId = 4L;
+        ArticleDto articleDto = new ArticleDto();
         articleDto.setAuthor("Author");
         articleDto.setPages(23);
         articleDto.setId(id);
         articleDto.setTitle("title");
+
         articleRepositoryMemory.save(articleDto);
 
         // WHEN
-        ArticleDto dto=articleRepositoryMemory.getById(id);
+        ArticleDto dto = articleRepositoryMemory.getById(notExistsId);
+
         // THEN
-        assertEquals(articleDto,dto);
+        assertNull(dto);
     }
+
+    @Test
+    void getById_Exists() {
+        // GIVEN
+        ArticleRepositoryMemoryImpl articleRepositoryMemory = new ArticleRepositoryMemoryImpl();
+        Long id = 2L;
+        ArticleDto articleDto = new ArticleDto();
+        articleDto.setAuthor("Author");
+        articleDto.setPages(23);
+        articleDto.setId(id);
+        articleDto.setTitle("title");
+
+        articleRepositoryMemory.save(articleDto);
+
+        // WHEN
+        ArticleDto dto = articleRepositoryMemory.getById(id);
+
+        // THEN
+        assertEquals(articleDto, dto);
+    }
+    @Test
     void save_update(){
         // GIWEN
         ArticleRepositoryMemoryImpl articleRepositoryMemory = new ArticleRepositoryMemoryImpl();
@@ -147,6 +177,6 @@ public class ArticleRepositoryMemoryImplTest {
         List<ArticleDto> articleDtoList=articleRepositoryMemory.findall();
         assertEquals(1,articleRepositoryMemory.findall().size());
 
-        assertEquals(articleDto2,articleRepositoryMemory.getById(id));
+        assertEquals(articleDto2,articleDtoList.get(0));
     }
 }

@@ -12,7 +12,7 @@ public class ArticleRepositoryMemoryImpl implements ArticleRepository {
     public int findArticleById(Long id) {
         int found = -1;
         for (int i = 0; i < articles.size(); i++) {
-            if (articles.get(i).getId()==id) {
+            if (articles.get(i).getId()==id){
                 found = i;
                 break;
             }
@@ -40,7 +40,7 @@ public class ArticleRepositoryMemoryImpl implements ArticleRepository {
             ArticleDto foundArticle = articles.get(found);
             foundArticle.setAuthor(articleDto.getAuthor());
             foundArticle.setPages(articleDto.getPages());
-            //foundArticle.setTitle(articleDto.setTitle());
+            foundArticle.setTitle(articleDto.getTitle());
         }else{
             articles.add(articleDto);
         }
