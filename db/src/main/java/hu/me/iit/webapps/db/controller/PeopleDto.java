@@ -1,4 +1,8 @@
-package hu.me.iit.webapps.db;
+package hu.me.iit.webapps.db.controller;
+
+
+
+import hu.me.iit.webapps.db.service.People;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;

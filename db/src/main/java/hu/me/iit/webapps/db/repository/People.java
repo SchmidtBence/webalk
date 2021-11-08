@@ -1,4 +1,4 @@
-package hu.me.iit.webapps.db;
+package hu.me.iit.webapps.db.repository;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -37,4 +37,6 @@ public class People {
     public void setName(String name) {
         this.name = name;
     }
+
+
 }
