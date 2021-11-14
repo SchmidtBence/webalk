@@ -2,17 +2,20 @@ package hu.me.iit.webapps.db.controller;
 
 
 import hu.me.iit.webapps.db.service.People;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.*;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import hu.me.iit.webapps.db.service.PeopleService;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping("/people")
 public class PeopleController {
+
     private final PeopleService peopleService;
 
     public PeopleController(PeopleService peopleService) {
@@ -29,8 +32,10 @@ public class PeopleController {
         return peopleDtoList;
     }
 
-    public PeopleDto save(PeopleCreateDto peopleDto){
-        return new PeopleDto(peopleService.create(peopleDto.toPeople()));
+    @PostMapping(produces= MediaType.APPLICATION_JSON_VALUE)
+    public PeopleDto save(@RequestBody @Valid PeopleCreateDto peopleCreateDto){
+        return new PeopleDto(peopleService.create(peopleCreateDto.toPeople()));
     }
+
 
 }

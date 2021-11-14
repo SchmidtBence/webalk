@@ -1,7 +1,5 @@
 package hu.me.iit.webapps.db.controller;
 
-
-
 import hu.me.iit.webapps.db.service.People;
 
 import javax.validation.constraints.NotEmpty;

@@ -1,9 +1,7 @@
 package hu.me.iit.webapps.db.service;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 
+import hu.me.iit.webapps.db.repository.PeopleModel;
 
 public class People {
 
@@ -40,11 +38,10 @@ public class People {
     public People() {
     }
 
-
-    public People(hu.me.iit.webapps.db.repository.People people){
-        this.age=people.getAge();
-        this.name=people.getName();
-        this.id=people.getId();
+    public People(PeopleModel people) {
+        this.id = people.getId();
+        this.age = people.getAge();
+        this.name = people.getName();
     }
 
     public People(Long id, int age, String name) {
@@ -53,7 +50,7 @@ public class People {
         this.name = name;
     }
 
-    public hu.me.iit.webapps.db.repository.People people(){
-
+    public PeopleModel toEntity(){
+        return new PeopleModel(id, age, name);
     }
 }

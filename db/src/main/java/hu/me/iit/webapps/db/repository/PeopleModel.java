@@ -5,7 +5,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Entity
-public class People {
+public class PeopleModel {
     @Id
     @GeneratedValue
     private Long id;
@@ -38,5 +38,13 @@ public class People {
         this.name = name;
     }
 
+    public PeopleModel() {
+    }
 
+
+    public PeopleModel(Long id, int age, String name) {
+        this.id = id;
+        this.age = age;
+        this.name = name;
+    }
 }
