@@ -46,4 +46,8 @@ public class PeopleDto {
     public void setAge(int age) {
         this.age = age;
     }
+
+    public People toPeople() {
+        return new People(id,age,name);
+    }
 }
