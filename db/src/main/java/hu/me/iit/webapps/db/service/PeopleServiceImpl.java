@@ -59,4 +59,9 @@ public class PeopleServiceImpl implements PeopleService {
      peopleRepository.save(people.toEntity());
     }
 
+    @Override
+    public Iterable findByIdAgeGreather(int age) {
+        return null;
+    }
+
 }

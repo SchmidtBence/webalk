@@ -52,8 +52,8 @@ public class PeopleController {
         peopleService.save(peopleDto.toPeople());
     }
 
-    @GetMapping("/findByAgeGt")
+    /*@GetMapping("/findByAgeGt")
     Iterable<PeopleDto> findAdultPeople(@RequestBody("age") int age){
         peopleService.findByIdAgeGreather(age);
-    }
+    }*/
 }
