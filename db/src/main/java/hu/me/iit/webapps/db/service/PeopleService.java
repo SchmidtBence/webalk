@@ -7,9 +7,9 @@ public interface PeopleService {
 
     void delete(Long id);
 
-    People getById(Long id) throws NoSuchEntityException;
+    People getById(Long id);
 
     void save(People people);
 
-    Iterable findByIdAgeGreather(int age);
+    Iterable<? extends People> findByAgeGreatherThan(int age);
 }

@@ -60,8 +60,16 @@ public class PeopleServiceImpl implements PeopleService {
     }
 
     @Override
-    public Iterable findByIdAgeGreather(int age) {
-        return null;
+    public Iterable<? extends People> findByAgeGreatherThan(int age) {
+        return StreamSupport.stream(peopleRepository.findAllByAgeGreaterThanEqual(age).spliterator(), false)
+                .map(People::new)
+                .collect(Collectors.toList());
+    }
+
+    public Iterable<People> getAllPeople2() {
+        return StreamSupport.stream(peopleRepository.findAll().spliterator(), false)
+                .map(People::new)
+                .collect(Collectors.toList());
     }
 
 }

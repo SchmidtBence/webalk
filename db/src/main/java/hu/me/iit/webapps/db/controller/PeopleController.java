@@ -52,8 +52,13 @@ public class PeopleController {
         peopleService.save(peopleDto.toPeople());
     }
 
-    /*@GetMapping("/findByAgeGt")
-    Iterable<PeopleDto> findAdultPeople(@RequestBody("age") int age){
-        peopleService.findByIdAgeGreather(age);
-    }*/
+    @GetMapping("/findByAgeGt")
+    Iterable<PeopleDto> findAdultPeople( @RequestParam("age") int age ) {
+        List<hu.me.iit.webapps.db.controller.PeopleDto> peopleDtoList = new ArrayList<>();
+        for (People people : peopleService.findByAgeGreatherThan(age)) {
+            peopleDtoList.add(new hu.me.iit.webapps.db.controller.PeopleDto(people));
+        }
+
+        return peopleDtoList;
+    }
 }
